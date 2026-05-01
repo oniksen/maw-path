@@ -1,5 +1,5 @@
 // Данные курса
-export const courseData = {
+const courseData = {
     weeks: [
         {
             id: 1,
@@ -247,10 +247,8 @@ export const courseData = {
                     ]
                 }
             ]
-        }
+}
     ]
 };
-            ]
-        }
-    ]
-}
+
+window.courseData = courseData;

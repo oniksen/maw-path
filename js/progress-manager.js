@@ -1,5 +1,3 @@
-import { CONFIG } from './config.js';
-
 class ProgressManager {
     constructor() {
         this.progress = this._loadProgress();
@@ -64,4 +62,4 @@ class ProgressManager {
     }
 }
 
-export const progressManager = new ProgressManager();
+window.progressManager = new ProgressManager();

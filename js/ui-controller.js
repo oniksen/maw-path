@@ -1,7 +1,3 @@
-import { courseData } from './data.js';
-import { STATS_TEMPLATE, CONFIG } from './config.js';
-import { progressManager } from './progress-manager.js';
-
 class UIController {
     constructor() {
         this.currentWeek = 1;
@@ -338,4 +334,4 @@ ${day.type === 'study' ? '<span class="day-badge day-badge--study">📚 Учёб
     }
 }
 
-export const uiController = new UIController();
+window.uiController = new UIController();
