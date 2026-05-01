@@ -409,13 +409,12 @@
             transform: translateY(-2px);
         }
 
-        /* Контент недели */
+/* Контент недели */
         .week-content {
-            display: none;
-            animation: fadeSlideIn 0.45s var(--transition-smooth);
+            display: none !important;
         }
         .week-content.active {
-            display: block;
+            display: block !important;
         }
         @keyframes fadeSlideIn {
             from {
@@ -808,10 +807,10 @@
             <div class="hero-badge">📱 Android Senior Roadmap</div>
             <h1>ModernAndroidWarrior</h1>
             <p class="subtitle">Полная дорожная карта от основ Android до продвинутого UI — с расписанием по дням и отслеживанием прогресса</p>
-            <div class="dates">
-                <span>📅 5 мая 2026</span>
+<div class="dates">
+                <span>📅 3 мая 2026</span>
                 <span class="dot"></span>
-                <span>25 мая 2026</span>
+                <span>23 мая 2026</span>
                 <span style="margin-left:4px;font-weight:700;color:#E040FB;">3 недели</span>
             </div>
         </header>
@@ -835,7 +834,7 @@
             </div>
             <div class="stat-card">
                 <div class="icon">🗓️</div>
-                <div class="value" id="totalStudyDays">14</div>
+                <div class="value" id="totalStudyDays">15</div>
                 <div class="label">Учебных дней</div>
             </div>
             <div class="stat-card">
@@ -875,19 +874,19 @@
 
         <!-- Табы -->
         <div class="tabs" id="tabsContainer">
-            <button class="tab-btn active" data-week="1">🗓 Неделя 1 <small>(5–11 мая)</small></button>
-            <button class="tab-btn" data-week="2">🗓 Неделя 2 <small>(12–18 мая)</small></button>
-            <button class="tab-btn" data-week="3">🗓 Неделя 3 <small>(19–25 мая)</small></button>
+<button class="tab-btn active" data-week="1">🗓 Неделя 1 <small>(3–9 мая)</small></button>
+            <button class="tab-btn" data-week="2">🗓 Неделя 2 <small>(10–16 мая)</small></button>
+            <button class="tab-btn" data-week="3">🗓 Неделя 3 <small>(17–23 мая)</small></button>
         </div>
 
-        <!-- Контент недель -->
+<!-- Контент недель -->
         <div id="weeksContainer">
             <!-- Неделя 1 -->
             <div class="week-content active" data-week="1">
-                <div class="day-card" data-day="mon-1" data-blocks="1">
+                <div class="day-card" data-day="sun-1" data-blocks="6">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ПН<br><small>5 мая</small></div>
-                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–21:00</span></div>
+                        <div class="day-indicator">ВС<br><small>3 мая</small></div>
+                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">Конспект</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
@@ -897,78 +896,21 @@
                             <div class="block-info"><span class="block-title">Глава 1, Блок 1. Android Structure</span><br><span class="block-meta">Просмотр + практика AIDL + конспект</span></div>
                             <span class="block-time">2ч 48м</span>
                         </div>
-                    </div>
-                </div>
-                <div class="day-card" data-day="tue-1" data-blocks="1">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ВТ<br><small>6 мая</small></div>
-                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:30–21:00</span></div>
-                        <span class="day-badge badge-study">📚 Учёба</span>
-                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
-                    </div>
-                    <div class="day-body">
                         <div class="block-item" data-block-id="1-2" onclick="toggleBlock(this, '1-2')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 1, Блок 1.5. Сеть (часть 1)</span><br><span class="block-meta">Полный просмотр видео + конспект</span></div>
                             <span class="block-time">2ч 30м</span>
                         </div>
-                    </div>
-                </div>
-                <div class="day-card rest-day" data-day="wed-1" data-blocks="0">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">СР<br><small>7 мая</small></div>
-                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
-                        <span class="day-badge badge-rest">😴 Отдых</span>
-                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
-                    </div>
-                </div>
-                <div class="day-card" data-day="thu-1" data-blocks="1">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ЧТ<br><small>8 мая</small></div>
-                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:00</span></div>
-                        <span class="day-badge badge-study">📚 Учёба</span>
-                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
-                    </div>
-                    <div class="day-body">
                         <div class="block-item" data-block-id="1-3" onclick="toggleBlock(this, '1-3')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 1, Блок 1.5. Сеть (часть 2)</span><br><span class="block-meta">Повтор практики: с видео + без видео</span></div>
                             <span class="block-time">3ч</span>
                         </div>
-                    </div>
-                </div>
-                <div class="day-card rest-day" data-day="fri-1" data-blocks="0">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ПТ<br><small>9 мая</small></div>
-                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
-                        <span class="day-badge badge-home">🏠 Дела</span>
-                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
-                    </div>
-                </div>
-                <div class="day-card" data-day="sat-1" data-blocks="1">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">СБ<br><small>10 мая</small></div>
-                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–11:15</span></div>
-                        <span class="day-badge badge-study">📚 Учёба</span>
-                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
-                    </div>
-                    <div class="day-body">
                         <div class="block-item" data-block-id="1-4" onclick="toggleBlock(this, '1-4')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 1, Блок 4. Background Work</span><br><span class="block-meta">Просмотр + двойной повтор практики + конспект</span></div>
                             <span class="block-time">4ч 15м</span>
                         </div>
-                    </div>
-                </div>
-                <div class="day-card" data-day="sun-1" data-blocks="6">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ВС<br><small>11 мая</small></div>
-                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">10:00–14:45 (спортзал утром)</span></div>
-                        <span class="day-badge badge-study">📚 Учёба</span>
-                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Зал</span>
-                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
-                    </div>
-                    <div class="day-body">
                         <div class="block-item" data-block-id="1-5" onclick="toggleBlock(this, '1-5')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 1, Блок 2. AOT vs JIT</span><br><span class="block-meta">Микроблок ~40 мин</span></div><span class="block-time">40м</span>
@@ -977,18 +919,74 @@
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 1, Блок 3. Java Memory Model</span><br><span class="block-meta">Микроблок ~1 ч</span></div><span class="block-time">1ч</span>
                         </div>
+                    </div>
+                </div>
+                <div class="day-card" data-day="mon-1" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ПН<br><small>4 мая</small></div>
+                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–21:00</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
                         <div class="block-item" data-block-id="1-7" onclick="toggleBlock(this, '1-7')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 1, Блок 5. Performance</span><br><span class="block-meta">Микроблок ~50 мин</span></div><span class="block-time">50м</span>
                         </div>
+                    </div>
+                </div>
+                <div class="day-card" data-day="tue-1" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ВТ<br><small>5 мая</small></div>
+                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:30–21:00</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
                         <div class="block-item" data-block-id="1-8" onclick="toggleBlock(this, '1-8')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 1, Блок 6. UI</span><br><span class="block-meta">Микроблок ~53 мин</span></div><span class="block-time">53м</span>
                         </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="wed-1" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СР<br><small>6 мая</small></div>
+                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
+                        <span class="day-badge badge-rest">😴 Отдых</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="thu-1" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ЧТ<br><small>7 мая</small></div>
+                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:00</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
                         <div class="block-item" data-block-id="1-9" onclick="toggleBlock(this, '1-9')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 2, Блок 2. Clean Architecture</span><br><span class="block-meta">Микроблок ~45 мин</span></div><span class="block-time">45м</span>
                         </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="fri-1" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ПТ<br><small>8 мая</small></div>
+                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
+                        <span class="day-badge badge-home">🏠 Дела</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                                <div class="day-card" data-day="sat-1" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СБ<br><small>9 мая</small></div>
+                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–11:15</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
                         <div class="block-item" data-block-id="1-10" onclick="toggleBlock(this, '1-10')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 2, Блок 3. SOLID</span><br><span class="block-meta">Микроблок ~30 мин</span></div><span class="block-time">30м</span>
@@ -999,11 +997,12 @@
 
             <!-- Неделя 2 -->
             <div class="week-content" data-week="2">
-                <div class="day-card" data-day="mon-2" data-blocks="1">
+                <div class="day-card" data-day="sun-2" data-blocks="2">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ПН<br><small>12 мая</small></div>
-                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–21:00</span></div>
+                        <div class="day-indicator">ВС<br><small>10 мая</small></div>
+                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">10:00–16:00 (спортзал утром)</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Зал</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
                     <div class="day-body">
@@ -1011,34 +1010,16 @@
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 2, Блок 1. Многомодульность (часть 1)</span><br><span class="block-meta">Просмотр + конспект</span></div><span class="block-time">3ч</span>
                         </div>
-                    </div>
-                </div>
-                <div class="day-card" data-day="tue-2" data-blocks="1">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ВТ<br><small>13 мая</small></div>
-                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:00–21:10</span></div>
-                        <span class="day-badge badge-study">📚 Учёба</span>
-                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
-                    </div>
-                    <div class="day-body">
                         <div class="block-item" data-block-id="2-2" onclick="toggleBlock(this, '2-2')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 2, Блок 1. Многомодульность (часть 2)</span><br><span class="block-meta">Практика + повтор</span></div><span class="block-time">3ч 6м</span>
                         </div>
                     </div>
                 </div>
-                <div class="day-card rest-day" data-day="wed-2" data-blocks="0">
+                <div class="day-card" data-day="mon-2" data-blocks="1">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">СР<br><small>14 мая</small></div>
-                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
-                        <span class="day-badge badge-rest">😴 Отдых</span>
-                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
-                    </div>
-                </div>
-                <div class="day-card" data-day="thu-2" data-blocks="4">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ЧТ<br><small>15 мая</small></div>
-                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:03</span></div>
+                        <div class="day-indicator">ПН<br><small>11 мая</small></div>
+                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–21:00</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
@@ -1061,18 +1042,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="day-card rest-day" data-day="fri-2" data-blocks="0">
+                <div class="day-card" data-day="tue-2" data-blocks="1">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ПТ<br><small>16 мая</small></div>
-                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
-                        <span class="day-badge badge-home">🏠 Дела</span>
-                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
-                    </div>
-                </div>
-                <div class="day-card" data-day="sat-2" data-blocks="5">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">СБ<br><small>17 мая</small></div>
-                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–12:30</span></div>
+                        <div class="day-indicator">ВТ<br><small>12 мая</small></div>
+                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:00–21:10</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
@@ -1081,6 +1054,24 @@
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 2, Блок 7. Ошибки в проекте</span><br><span class="block-meta">~30 мин</span></div><span class="block-time">30м</span>
                         </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="wed-2" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СР<br><small>13 мая</small></div>
+                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
+                        <span class="day-badge badge-rest">😴 Отдых</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="thu-2" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ЧТ<br><small>14 мая</small></div>
+                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:03</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
                         <div class="block-item" data-block-id="2-8" onclick="toggleBlock(this, '2-8')">
                             <div class="block-checkbox"></div>
                             <div class="block-info"><span class="block-title">Глава 3, Блок 1. Зачем нам сборка</span><br><span class="block-meta">~30 мин</span></div><span class="block-time">30м</span>
@@ -1099,12 +1090,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="day-card" data-day="sun-2" data-blocks="2">
+                <div class="day-card rest-day" data-day="fri-2" data-blocks="0">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ВС<br><small>18 мая</small></div>
-                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">10:00–16:00 (спортзал утром)</span></div>
+                        <div class="day-indicator">ПТ<br><small>15 мая</small></div>
+                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
+                        <span class="day-badge badge-home">🏠 Дела</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="sat-2" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СБ<br><small>16 мая</small></div>
+                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–12:30</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
-                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Зал</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
                     <div class="day-body">
@@ -1122,11 +1120,12 @@
 
             <!-- Неделя 3 -->
             <div class="week-content" data-week="3">
-                <div class="day-card" data-day="mon-3" data-blocks="1">
+                <div class="day-card" data-day="sun-3" data-blocks="1">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ПН<br><small>19 мая</small></div>
-                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–20:40</span></div>
+                        <div class="day-indicator">ВС<br><small>17 мая</small></div>
+                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">10:00–16:00 (спортзал утром)</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Зал</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
                     <div class="day-body">
@@ -1136,10 +1135,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="day-card" data-day="tue-3" data-blocks="2">
+                <div class="day-card" data-day="mon-3" data-blocks="1">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ВТ<br><small>20 мая</small></div>
-                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:30–21:00</span></div>
+                        <div class="day-indicator">ПН<br><small>18 мая</small></div>
+                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–20:40</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
@@ -1154,19 +1153,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="day-card rest-day" data-day="wed-3" data-blocks="0">
+                <div class="day-card" data-day="tue-3" data-blocks="1">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">СР<br><small>21 мая</small></div>
-                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
-                        <span class="day-badge badge-rest">😴 Отдых</span>
-                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
-                    </div>
-                </div>
-                <div class="day-card" data-day="thu-3" data-blocks="3">
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ЧТ<br><small>22 мая</small></div>
-                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:00</span></div>
-                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <div class="day-indicator">ВТ<br><small>19 мая</small></div>
+                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:30–21:00</span></div>
+                        <span class="day-badge badge-study">📚 У��ёба</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
                     <div class="day-body">
@@ -1184,18 +1175,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="day-card rest-day" data-day="fri-3" data-blocks="0">
+                <div class="day-card rest-day" data-day="wed-3" data-blocks="0">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ПТ<br><small>23 мая</small></div>
-                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
-                        <span class="day-badge badge-home">🏠 Дела</span>
+                        <div class="day-indicator">СР<br><small>20 мая</small></div>
+                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
+                        <span class="day-badge badge-rest">😴 Отдых</span>
                         <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
                     </div>
                 </div>
-                <div class="day-card" data-day="sat-3" data-blocks="2">
+                <div class="day-card" data-day="thu-3" data-blocks="1">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">СБ<br><small>24 мая</small></div>
-                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–13:10</span></div>
+                        <div class="day-indicator">ЧТ<br><small>21 мая</small></div>
+                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:00</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
@@ -1210,12 +1201,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="day-card" data-day="sun-3" data-blocks="1">
+                <div class="day-card rest-day" data-day="fri-3" data-blocks="0">
                     <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-indicator">ВС<br><small>25 мая</small></div>
-                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">10:00–14:15 (спортзал утром)</span></div>
+                        <div class="day-indicator">ПТ<br><small>22 мая</small></div>
+                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
+                        <span class="day-badge badge-home">🏠 Дела</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="sat-3" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СБ<br><small>23 мая</small></div>
+                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–13:10</span></div>
                         <span class="day-badge badge-study">📚 Учёба</span>
-                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Зал</span>
                         <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
                     </div>
                     <div class="day-body">
@@ -1442,12 +1440,12 @@
             }, 8000);
         }
 
-        // ============ ТАБЫ ============
+// ============ ТАБЫ ============
         function switchWeek(weekNumber) {
             document.querySelectorAll('.week-content').forEach(wc => wc.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
-            const targetContent = document.querySelector(`.week-content[data-week="${weekNumber}"]`);
-            const targetTab = document.querySelector(`.tab-btn[data-week="${weekNumber}"]`);
+            var targetContent = document.querySelector('.week-content[data-week="' + weekNumber + '"]');
+            var targetTab = document.querySelector('.tab-btn[data-week="' + weekNumber + '"]');
             if (targetContent) targetContent.classList.add('active');
             if (targetTab) targetTab.classList.add('active');
         }
@@ -1459,9 +1457,9 @@
 
             // Вешаем обработчики на табы
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const week = this.getAttribute('data-week');
-                    switchWeek(parseInt(week));
+btn.addEventListener('click', function() {
+                    var week = this.getAttribute('data-week');
+                    switchWeek(week);
                 });
             });
 
@@ -1499,7 +1497,7 @@
         console.log('   Горячие клавиши: Ctrl+1/2/3 — переключение недель, Ctrl+E — развернуть, Ctrl+C — свернуть');
         console.log('   Прогресс сохраняется в localStorage браузера.');
         console.log('   Всего блоков:', TOTAL_BLOCKS);
-        console.log('   Старт: 5 мая 2026 | Финиш: 25 мая 2026 | 3 недели 🚀');
+        console.log('   Старт: 3 мая 2026 | Финиш: 23 мая 2026 | 3 недели 🚀');
     </script>
 </body>
 </html>
