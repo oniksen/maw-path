@@ -1,0 +1,99 @@
+.block-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+    background: var(--surface-variant);
+    transition: all 0.3s var(--transition-smooth);
+    cursor: pointer;
+}
+
+.block-item:hover {
+    background: var(--primary-container);
+    box-shadow: var(--shadow-sm);
+}
+
+.block-item--completed {
+    background: var(--success-container);
+    opacity: 0.85;
+}
+
+.block-item--completed .block-title {
+    text-decoration: line-through;
+    text-decoration-color: var(--success);
+    text-decoration-thickness: 2px;
+}
+
+.block-checkbox {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2.5px solid var(--outline);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s var(--transition-spring);
+    background: white;
+    margin-top: 1px;
+    position: relative;
+}
+
+.block-item--completed .block-checkbox {
+    background: var(--success);
+    border-color: var(--success);
+}
+
+.block-checkbox::after {
+    content: '✓';
+    color: white;
+    font-weight: 700;
+    font-size: 0.8rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.25s var(--transition-spring);
+}
+
+.block-item--completed .block-checkbox::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.block-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.block-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--on-surface);
+    line-height: 1.3;
+}
+
+.block-meta {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+.block-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.block-item--completed .block-time {
+    color: var(--success);
+}
+
+.block-item--highlight {
+    animation: highlightPulse 0.6s var(--transition-smooth);
+}

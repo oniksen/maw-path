@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModernAndroidWarrior — Дорожная карта</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6750A4;
+            --primary-container: #EADDFF;
+            --on-primary: #FFFFFF;
+            --on-primary-container: #21005D;
+            --secondary: #625B71;
+            --secondary-container: #E8DEF8;
+            --on-secondary-container: #1D192B;
+            --tertiary: #7D5260;
+            --tertiary-container: #FFD8E4;
+            --on-tertiary-container: #31111D;
+            --surface: #FFFBFE;
+            --surface-variant: #E7E0EC;
+            --on-surface: #1C1B1F;
+            --on-surface-variant: #49454F;
+            --outline: #79747E;
+            --outline-variant: #CAC4D0;
+            --error: #B3261E;
+            --error-container: #F9DEDC;
+            --success: #2E7D32;
+            --success-container: #C8E6C9;
+            --gradient-1: linear-gradient(135deg, #6750A4 0%, #B388FF 50%, #E040FB 100%);
+            --gradient-2: linear-gradient(135deg, #7C4DFF 0%, #536DFE 50%, #448AFF 100%);
+            --gradient-3: linear-gradient(135deg, #E040FB 0%, #FF4081 50%, #FF6E40 100%);
+            --gradient-surface: linear-gradient(180deg, #FFFBFE 0%, #F7F2FF 50%, #EDE7F6 100%);
+            --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-2: 0 4px 12px rgba(103, 80, 164, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+            --shadow-3: 0 8px 28px rgba(103, 80, 164, 0.18), 0 4px 12px rgba(0, 0, 0, 0.10);
+            --shadow-4: 0 16px 48px rgba(103, 80, 164, 0.25), 0 8px 20px rgba(0, 0, 0, 0.14);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 36px;
+            --radius-full: 999px;
+            --transition-smooth: cubic-bezier(0.4, 0.0, 0.2, 1);
+            --transition-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-spring: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--gradient-surface);
+            color: var(--on-surface);
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Декоративные фоновые элементы */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -300px;
+            right: -200px;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(179, 136, 255, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBubble 20s ease-in-out infinite;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -250px;
+            left: -180px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(224, 64, 251, 0.10) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBubble 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatBubble {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(40px, -30px) scale(1.08);
+            }
+            50% {
+                transform: translate(-20px, -50px) scale(0.95);
+            }
+            75% {
+                transform: translate(-35px, 20px) scale(1.05);
+            }
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Хедер */
+        .hero {
+            text-align: center;
+            padding: 48px 24px 36px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-container);
+            color: var(--on-primary-container);
+            padding: 6px 18px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        .hero-badge::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: var(--radius-full);
+            background: var(--gradient-1);
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--on-surface-variant);
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .hero .dates {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface);
+            padding: 10px 22px;
+            border-radius: var(--radius-full);
+            margin-top: 18px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--primary);
+            box-shadow: var(--shadow-1);
+            border: 1px solid var(--outline-variant);
+        }
+        .hero .dates .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(1.6);
+            }
+        }
+
+        /* Статистика */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 20px 22px;
+            box-shadow: var(--shadow-1);
+            border: 1px solid var(--outline-variant);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s var(--transition-smooth);
+            cursor: default;
+        }
+        .stat-card:hover {
+            box-shadow: var(--shadow-3);
+            transform: translateY(-3px);
+            border-color: var(--primary-container);
+        }
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary-container);
+            opacity: 0.3;
+            transition: all 0.5s var(--transition-smooth);
+        }
+        .stat-card:hover::after {
+            opacity: 0.55;
+            transform: scale(1.4);
+        }
+        .stat-card .icon {
+            font-size: 2rem;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--on-surface);
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+        }
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: var(--on-surface-variant);
+            font-weight: 500;
+            margin-top: 4px;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-card.accent {
+            background: var(--primary-container);
+            border: none;
+            color: var(--on-primary-container);
+        }
+        .stat-card.accent .value {
+            color: var(--on-primary-container);
+        }
+        .stat-card.accent .label {
+            color: var(--on-primary-container);
+            opacity: 0.8;
+        }
+        .stat-card.accent::after {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Прогресс-бар */
+        .progress-section {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 24px 28px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-2);
+            border: 1px solid var(--outline-variant);
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-1);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+            margin-top: 8px;
+        }
+        .progress-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--on-surface);
+        }
+        .progress-percent {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .progress-track {
+            width: 100%;
+            height: 18px;
+            background: var(--surface-variant);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-2);
+            border-radius: var(--radius-full);
+            transition: width 0.7s var(--transition-bouncy);
+            position: relative;
+            min-width: 0%;
+        }
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            right: 4px;
+            top: 3px;
+            bottom: 3px;
+            width: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-full);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--on-surface-variant);
+            font-weight: 500;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        /* Табы недель */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            justify-content: center;
+        }
+        .tab-btn {
+            padding: 10px 24px;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--outline-variant);
+            background: var(--surface);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all 0.3s var(--transition-smooth);
+            color: var(--on-surface-variant);
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            background: var(--primary-container);
+            border-color: var(--primary);
+            color: var(--on-primary-container);
+            box-shadow: var(--shadow-2);
+            transform: translateY(-2px);
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--on-primary);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-3);
+            transform: translateY(-2px);
+        }
+
+/* Контент недели */
+        .week-content {
+            display: none !important;
+        }
+        .week-content.active {
+            display: block !important;
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* День */
+        .day-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-1);
+            border: 1px solid var(--outline-variant);
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+            position: relative;
+        }
+        .day-card:hover {
+            box-shadow: var(--shadow-2);
+            border-color: var(--primary-container);
+        }
+        .day-card.rest-day {
+            opacity: 0.7;
+            border-style: dashed;
+            background: var(--surface-variant);
+        }
+        .day-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+            flex-wrap: wrap;
+        }
+        .day-header:hover {
+            background: rgba(103, 80, 164, 0.03);
+        }
+        .day-indicator {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            background: var(--primary-container);
+            color: var(--on-primary-container);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .day-card.rest-day .day-indicator {
+            background: var(--surface-variant);
+            color: var(--on-surface-variant);
+            border: 2px dashed var(--outline);
+        }
+        .day-card.completed-day .day-indicator {
+            background: var(--success-container);
+            color: var(--success);
+            border: 3px solid var(--success);
+        }
+        .day-info {
+            flex: 1;
+            min-width: 180px;
+        }
+        .day-info .day-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--on-surface);
+        }
+        .day-info .day-date {
+            font-size: 0.8rem;
+            color: var(--on-surface-variant);
+            font-weight: 500;
+        }
+        .day-badge {
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .badge-study {
+            background: var(--primary-container);
+            color: var(--on-primary-container);
+        }
+        .badge-rest {
+            background: var(--tertiary-container);
+            color: var(--on-tertiary-container);
+        }
+        .badge-gym {
+            background: #FFE0B2;
+            color: #E65100;
+        }
+        .badge-home {
+            background: #BBDEFB;
+            color: #0D47A1;
+        }
+        .badge-success {
+            background: var(--success-container);
+            color: var(--success);
+        }
+
+        .day-body {
+            padding: 0 20px 18px 20px;
+            display: none;
+            border-top: 1px solid var(--outline-variant);
+            margin-top: 4px;
+            padding-top: 16px;
+        }
+        .day-card.open .day-body {
+            display: block;
+        }
+        .day-card.open .day-header {
+            border-bottom: 1px solid transparent;
+        }
+
+        /* Блоки */
+        .block-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
+            background: var(--surface-variant);
+            transition: all 0.3s var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
+        }
+        .block-item:hover {
+            background: var(--primary-container);
+            box-shadow: var(--shadow-1);
+        }
+        .block-item.completed {
+            background: var(--success-container);
+            text-decoration: none;
+            opacity: 0.85;
+        }
+        .block-item.completed .block-title {
+            text-decoration: line-through;
+            text-decoration-color: var(--success);
+            text-decoration-thickness: 2px;
+        }
+        .block-checkbox {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2.5px solid var(--outline);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s var(--transition-spring);
+            background: white;
+            margin-top: 1px;
+        }
+        .block-item.completed .block-checkbox {
+            background: var(--success);
+            border-color: var(--success);
+        }
+        .block-checkbox::after {
+            content: '✓';
+            color: white;
+            font-weight: 700;
+            font-size: 0.8rem;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.25s var(--transition-spring);
+        }
+        .block-item.completed .block-checkbox::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .block-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .block-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--on-surface);
+            line-height: 1.3;
+        }
+        .block-meta {
+            font-size: 0.75rem;
+            color: var(--on-surface-variant);
+            margin-top: 2px;
+            font-weight: 500;
+        }
+        .block-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            white-space: nowrap;
+            flex-shrink: 0;
+            align-self: center;
+        }
+        .block-item.completed .block-time {
+            color: var(--success);
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all 0.3s var(--transition-smooth);
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: var(--on-primary);
+            box-shadow: var(--shadow-2);
+        }
+        .btn-primary:hover {
+            box-shadow: var(--shadow-4);
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary-container);
+            transform: translateY(-2px);
+        }
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            gap: 5px;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 16px 0 8px;
+        }
+
+        /* Футер */
+        .footer {
+            text-align: center;
+            padding: 32px 20px;
+            color: var(--on-surface-variant);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .footer .heart {
+            color: #E040FB;
+            animation: pulse 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        /* Медиа */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .stat-card {
+                padding: 14px 16px;
+            }
+            .stat-card .value {
+                font-size: 1.5rem;
+            }
+            .day-header {
+                padding: 12px 14px;
+                gap: 10px;
+            }
+            .day-indicator {
+                width: 38px;
+                height: 38px;
+                font-size: 0.7rem;
+                border-radius: var(--radius-sm);
+            }
+            .block-item {
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            .block-time {
+                font-size: 0.7rem;
+            }
+            .tabs {
+                gap: 5px;
+            }
+            .tab-btn {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+        }
+        @media (max-width: 400px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .stat-card {
+                padding: 10px 12px;
+            }
+            .stat-card .value {
+                font-size: 1.3rem;
+            }
+            .stat-card .label {
+                font-size: 0.7rem;
+            }
+            .container {
+                padding: 10px 8px;
+            }
+            .hero {
+                padding: 24px 10px 20px;
+            }
+        }
+
+        /* Анимация конфетти при завершении */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            animation: confettiFall 2s ease-out forwards;
+        }
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(105vh) rotate(720deg);
+            }
+        }
+
+        /* Подсветка нового */
+        .highlight-pulse {
+            animation: highlightPulse 0.6s var(--transition-smooth);
+        }
+        @keyframes highlightPulse {
+            0%,
+            100% {
+                box-shadow: var(--shadow-1);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(103, 80, 164, 0.25);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--surface-variant);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Hero -->
+        <header class="hero">
+            <div class="hero-badge">📱 Android Senior Roadmap</div>
+            <h1>ModernAndroidWarrior</h1>
+            <p class="subtitle">Полная дорожная карта от основ Android до продвинутого UI — с расписанием по дням и отслеживанием прогресса</p>
+<div class="dates">
+                <span>📅 3 мая 2026</span>
+                <span class="dot"></span>
+                <span>23 мая 2026</span>
+                <span style="margin-left:4px;font-weight:700;color:#E040FB;">3 недели</span>
+            </div>
+        </header>
+
+        <!-- Статистика -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="icon">🎬</div>
+                <div class="value">29<small style="font-size:0.7em;"> ч</small></div>
+                <div class="label">Видеоматериалов</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">📝</div>
+                <div class="value" id="totalStudyHours">58<small style="font-size:0.7em;"> ч</small></div>
+                <div class="label">С учётом практики</div>
+            </div>
+            <div class="stat-card accent">
+                <div class="icon">📦</div>
+                <div class="value" id="totalBlocks">24</div>
+                <div class="label">Учебных блоков</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">🗓️</div>
+                <div class="value" id="totalStudyDays">15</div>
+                <div class="label">Учебных дней</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">💪</div>
+                <div class="value">3</div>
+                <div class="label">Дня спортзала / нед.</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">🧘</div>
+                <div class="value">9</div>
+                <div class="label">Дней отдыха</div>
+            </div>
+        </div>
+
+        <!-- Прогресс -->
+        <div class="progress-section" id="progressSection">
+            <div class="progress-header">
+                <h3>📊 Общий прогресс</h3>
+                <span class="progress-percent" id="progressPercent">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-details">
+                <span>Выполнено блоков: <strong id="completedCount">0</strong> / <strong id="totalBlocksCount">24</strong></span>
+                <span>Осталось: <strong id="remainingBlocks">24</strong></span>
+            </div>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="actions-row">
+            <button class="btn btn-outline btn-sm" onclick="expandAllDays()" title="Развернуть все дни">📖 Развернуть всё</button>
+            <button class="btn btn-outline btn-sm" onclick="collapseAllDays()" title="Свернуть все дни">📕 Свернуть всё</button>
+            <button class="btn btn-outline btn-sm" onclick="resetProgress()" title="Сбросить весь прогресс">🔄 Сбросить прогресс</button>
+            <button class="btn btn-primary btn-sm" onclick="window.scrollTo({top:0,behavior:'smooth'});" title="Наверх">⬆ Наверх</button>
+        </div>
+
+        <!-- Табы -->
+        <div class="tabs" id="tabsContainer">
+<button class="tab-btn active" data-week="1">🗓 Неделя 1 <small>(3–9 мая)</small></button>
+            <button class="tab-btn" data-week="2">🗓 Неделя 2 <small>(10–16 мая)</small></button>
+            <button class="tab-btn" data-week="3">🗓 Неделя 3 <small>(17–23 мая)</small></button>
+        </div>
+
+<!-- Контент недель -->
+        <div id="weeksContainer">
+            <!-- Неделя 1 -->
+            <div class="week-content active" data-week="1">
+                <div class="day-card" data-day="sun-1" data-blocks="6">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ВС<br><small>3 мая</small></div>
+                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">Конспект</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="1-1" onclick="toggleBlock(this, '1-1')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 1, Блок 1. Android Structure</span><br><span class="block-meta">Просмотр + практика AIDL + конспект</span></div>
+                            <span class="block-time">2ч 48м</span>
+                        </div>
+                        <div class="block-item" data-block-id="1-2" onclick="toggleBlock(this, '1-2')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 1, Блок 1.5. Сеть (часть 1)</span><br><span class="block-meta">Полный просмотр видео + конспект</span></div>
+                            <span class="block-time">2ч 30м</span>
+                        </div>
+                        <div class="block-item" data-block-id="1-3" onclick="toggleBlock(this, '1-3')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 1, Блок 1.5. Сеть (часть 2)</span><br><span class="block-meta">Повтор практики: с видео + без видео</span></div>
+                            <span class="block-time">3ч</span>
+                        </div>
+                        <div class="block-item" data-block-id="1-4" onclick="toggleBlock(this, '1-4')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 1, Блок 4. Background Work</span><br><span class="block-meta">Просмотр + двойной повтор практики + конспект</span></div>
+                            <span class="block-time">4ч 15м</span>
+                        </div>
+                        <div class="block-item" data-block-id="1-5" onclick="toggleBlock(this, '1-5')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 1, Блок 2. AOT vs JIT</span><br><span class="block-meta">Микроблок ~40 мин</span></div><span class="block-time">40м</span>
+                        </div>
+                        <div class="block-item" data-block-id="1-6" onclick="toggleBlock(this, '1-6')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 1, Блок 3. Java Memory Model</span><br><span class="block-meta">Микроблок ~1 ч</span></div><span class="block-time">1ч</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card" data-day="mon-1" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ПН<br><small>4 мая</small></div>
+                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–21:00</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="1-7" onclick="toggleBlock(this, '1-7')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 1, Блок 5. Performance</span><br><span class="block-meta">Микроблок ~50 мин</span></div><span class="block-time">50м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card" data-day="tue-1" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ВТ<br><small>5 мая</small></div>
+                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:30–21:00</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="1-8" onclick="toggleBlock(this, '1-8')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 1, Блок 6. UI</span><br><span class="block-meta">Микроблок ~53 мин</span></div><span class="block-time">53м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="wed-1" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СР<br><small>6 мая</small></div>
+                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
+                        <span class="day-badge badge-rest">😴 Отдых</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="thu-1" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ЧТ<br><small>7 мая</small></div>
+                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:00</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="1-9" onclick="toggleBlock(this, '1-9')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 2. Clean Architecture</span><br><span class="block-meta">Микроблок ~45 мин</span></div><span class="block-time">45м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="fri-1" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ПТ<br><small>8 мая</small></div>
+                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
+                        <span class="day-badge badge-home">🏠 Дела</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                                <div class="day-card" data-day="sat-1" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СБ<br><small>9 мая</small></div>
+                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–11:15</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="1-10" onclick="toggleBlock(this, '1-10')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 3. SOLID</span><br><span class="block-meta">Микроблок ~30 мин</span></div><span class="block-time">30м</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Неделя 2 -->
+            <div class="week-content" data-week="2">
+                <div class="day-card" data-day="sun-2" data-blocks="2">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ВС<br><small>10 мая</small></div>
+                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">10:00–16:00 (спортзал утром)</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Зал</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="2-1" onclick="toggleBlock(this, '2-1')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 1. Многомодульность (часть 1)</span><br><span class="block-meta">Просмотр + конспект</span></div><span class="block-time">3ч</span>
+                        </div>
+                        <div class="block-item" data-block-id="2-2" onclick="toggleBlock(this, '2-2')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 1. Многомодульность (часть 2)</span><br><span class="block-meta">Практика + повтор</span></div><span class="block-time">3ч 6м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card" data-day="mon-2" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ПН<br><small>11 мая</small></div>
+                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–21:00</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="2-3" onclick="toggleBlock(this, '2-3')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 4. Навигация</span><br><span class="block-meta">Микроблок ~39 мин</span></div><span class="block-time">39м</span>
+                        </div>
+                        <div class="block-item" data-block-id="2-4" onclick="toggleBlock(this, '2-4')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 4.5. Практика Decompose</span><br><span class="block-meta">Микроблок ~45 мин</span></div><span class="block-time">45м</span>
+                        </div>
+                        <div class="block-item" data-block-id="2-5" onclick="toggleBlock(this, '2-5')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 5. DI</span><br><span class="block-meta">Микроблок ~1 ч</span></div><span class="block-time">1ч</span>
+                        </div>
+                        <div class="block-item" data-block-id="2-6" onclick="toggleBlock(this, '2-6')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 6. Compose</span><br><span class="block-meta">Микроблок ~39 мин</span></div><span class="block-time">39м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card" data-day="tue-2" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ВТ<br><small>12 мая</small></div>
+                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:00–21:10</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="2-7" onclick="toggleBlock(this, '2-7')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 2, Блок 7. Ошибки в проекте</span><br><span class="block-meta">~30 мин</span></div><span class="block-time">30м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="wed-2" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СР<br><small>13 мая</small></div>
+                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
+                        <span class="day-badge badge-rest">😴 Отдых</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="thu-2" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ЧТ<br><small>14 мая</small></div>
+                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:03</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="2-8" onclick="toggleBlock(this, '2-8')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 3, Блок 1. Зачем нам сборка</span><br><span class="block-meta">~30 мин</span></div><span class="block-time">30м</span>
+                        </div>
+                        <div class="block-item" data-block-id="2-9" onclick="toggleBlock(this, '2-9')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 3, Блок 2. Основы Gradle</span><br><span class="block-meta">~1ч 48м</span></div><span class="block-time">1ч 48м</span>
+                        </div>
+                        <div class="block-item" data-block-id="2-10" onclick="toggleBlock(this, '2-10')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 3, Блок 3. Зависимости</span><br><span class="block-meta">~2ч 02м</span></div><span class="block-time">2ч 02м</span>
+                        </div>
+                        <div class="block-item" data-block-id="2-11" onclick="toggleBlock(this, '2-11')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 3, Блок 4. Kotlin Multiplatform</span><br><span class="block-meta">~39 мин</span></div><span class="block-time">39м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="fri-2" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ПТ<br><small>15 мая</small></div>
+                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
+                        <span class="day-badge badge-home">🏠 Дела</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="sat-2" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СБ<br><small>16 мая</small></div>
+                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–12:30</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="2-12" onclick="toggleBlock(this, '2-12')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 3, Блок 5. Flavors, Builds & Execution</span><br><span class="block-meta">~4ч 47м</span></div><span class="block-time">4ч 47м</span>
+                        </div>
+                        <div class="block-item" data-block-id="2-13" onclick="toggleBlock(this, '2-13')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 1. Тайны XML</span><br><span class="block-meta">~1ч 08м</span></div><span class="block-time">1ч 08м</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Неделя 3 -->
+            <div class="week-content" data-week="3">
+                <div class="day-card" data-day="sun-3" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ВС<br><small>17 мая</small></div>
+                        <div class="day-info"><span class="day-name">Воскресенье</span><br><span class="day-date">10:00–16:00 (спортзал утром)</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Зал</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="3-1" onclick="toggleBlock(this, '3-1')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 3, Блок 6. Публикация артефакта</span><br><span class="block-meta">~2ч 40м</span></div><span class="block-time">2ч 40м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card" data-day="mon-3" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ПН<br><small>18 мая</small></div>
+                        <div class="day-info"><span class="day-name">Понедельник</span><br><span class="day-date">18:00–20:40</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="3-2" onclick="toggleBlock(this, '3-2')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 2. Jetpack Compose Internals</span><br><span class="block-meta">~1ч 17м</span></div><span class="block-time">1ч 17м</span>
+                        </div>
+                        <div class="block-item" data-block-id="3-3" onclick="toggleBlock(this, '3-3')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 3. UI Performance (часть 1)</span><br><span class="block-meta">~1ч 13м</span></div><span class="block-time">1ч 13м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card" data-day="tue-3" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ВТ<br><small>19 мая</small></div>
+                        <div class="day-info"><span class="day-name">Вторник</span><br><span class="day-date">18:30–21:00</span></div>
+                        <span class="day-badge badge-study">📚 У��ёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="3-4" onclick="toggleBlock(this, '3-4')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 3. UI Performance (окончание)</span><br><span class="block-meta">~1ч 07м</span></div><span class="block-time">1ч 07м</span>
+                        </div>
+                        <div class="block-item" data-block-id="3-5" onclick="toggleBlock(this, '3-5')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 3.5. Обзор Tracer</span><br><span class="block-meta">~35 мин</span></div><span class="block-time">35м</span>
+                        </div>
+                        <div class="block-item" data-block-id="3-6" onclick="toggleBlock(this, '3-6')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 4. Custom Views (начало)</span><br><span class="block-meta">~1ч 18м</span></div><span class="block-time">1ч 18м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="wed-3" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СР<br><small>20 мая</small></div>
+                        <div class="day-info"><span class="day-name">Среда</span><br><span class="day-date">Выходной</span></div>
+                        <span class="day-badge badge-rest">😴 Отдых</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="thu-3" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ЧТ<br><small>21 мая</small></div>
+                        <div class="day-info"><span class="day-name">Четверг</span><br><span class="day-date">18:00–21:00</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="3-7" onclick="toggleBlock(this, '3-7')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 4. Custom Views (окончание)</span><br><span class="block-meta">~4ч 52м</span></div><span class="block-time">4ч 52м</span>
+                        </div>
+                        <div class="block-item" data-block-id="3-8" onclick="toggleBlock(this, '3-8')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 5. BDUI</span><br><span class="block-meta">~1ч 25м</span></div><span class="block-time">1ч 25м</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card rest-day" data-day="fri-3" data-blocks="0">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">ПТ<br><small>22 мая</small></div>
+                        <div class="day-info"><span class="day-name">Пятница</span><br><span class="day-date">Домашние дела</span></div>
+                        <span class="day-badge badge-home">🏠 Дела</span>
+                        <span class="day-badge badge-gym" style="margin-left:4px;">🏋️ Спортзал</span>
+                    </div>
+                </div>
+                <div class="day-card" data-day="sat-3" data-blocks="1">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div class="day-indicator">СБ<br><small>23 мая</small></div>
+                        <div class="day-info"><span class="day-name">Суббота</span><br><span class="day-date">7:00–13:10</span></div>
+                        <span class="day-badge badge-study">📚 Учёба</span>
+                        <span style="margin-left:auto;font-size:1.2rem;transition:transform 0.3s;display:inline-block;">▾</span>
+                    </div>
+                    <div class="day-body">
+                        <div class="block-item" data-block-id="3-9" onclick="toggleBlock(this, '3-9')">
+                            <div class="block-checkbox"></div>
+                            <div class="block-info"><span class="block-title">Глава 4, Блок 6. Animations and Magic</span><br><span class="block-meta">🎉 Финальный блок! ~6ч 10м</span></div><span class="block-time">6ч 10м</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Сделано с <span class="heart">❤️</span> для продуктивного обучения | ModernAndroidWarrior Roadmap 2026</p>
+            <p style="font-size:0.75rem;opacity:0.7;">Расписание учитывает: спортзал (ср, пт, вс), домашние дела (пт), отдых (ср), хобби (ежедневно 21:00–22:00)</p>
+        </div>
+    </div>
+
+    <script>
+        // ============ ДАННЫЕ ============
+        const TOTAL_BLOCKS = 24; // учебных блоков во всём курсе
+        const STORAGE_KEY = 'maw_roadmap_progress';
+
+        // Получаем сохранённый прогресс или создаём пустой
+        function getProgress() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (typeof parsed === 'object' && parsed !== null) {
+                        return parsed;
+                    }
+                }
+            } catch (e) { /* игнорируем */ }
+            return {};
+        }
+
+        function saveProgress(progress) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+            } catch (e) { /* игнорируем */ }
+        }
+
+        let progress = getProgress();
+
+        // ============ ФУНКЦИИ ============
+        function isBlockCompleted(blockId) {
+            return progress[blockId] === true;
+        }
+
+        function setBlockCompleted(blockId, completed) {
+            if (completed) {
+                progress[blockId] = true;
+            } else {
+                delete progress[blockId];
+            }
+            saveProgress(progress);
+            updateAllUI();
+        }
+
+        function countCompletedBlocks() {
+            let count = 0;
+            const allBlockItems = document.querySelectorAll('.block-item[data-block-id]');
+            allBlockItems.forEach(item => {
+                const bid = item.getAttribute('data-block-id');
+                if (progress[bid] === true) count++;
+            });
+            return count;
+        }
+
+        function updateAllUI() {
+            const completed = countCompletedBlocks();
+            const total = TOTAL_BLOCKS;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            // Прогресс-бар
+            const fill = document.getElementById('progressFill');
+            const percentEl = document.getElementById('progressPercent');
+            const completedCountEl = document.getElementById('completedCount');
+            const remainingBlocksEl = document.getElementById('remainingBlocks');
+            const totalBlocksCountEl = document.getElementById('totalBlocksCount');
+
+            if (fill) fill.style.width = percent + '%';
+            if (percentEl) percentEl.textContent = percent + '%';
+            if (completedCountEl) completedCountEl.textContent = completed;
+            if (remainingBlocksEl) remainingBlocksEl.textContent = total - completed;
+            if (totalBlocksCountEl) totalBlocksCountEl.textContent = total;
+
+            // Обновляем все блоки
+            const allBlockItems = document.querySelectorAll('.block-item[data-block-id]');
+            allBlockItems.forEach(item => {
+                const bid = item.getAttribute('data-block-id');
+                if (progress[bid] === true) {
+                    item.classList.add('completed');
+                } else {
+                    item.classList.remove('completed');
+                }
+            });
+
+            // Обновляем статус дней
+            const allDayCards = document.querySelectorAll('.day-card[data-blocks]');
+            allDayCards.forEach(dayCard => {
+                const blocksCount = parseInt(dayCard.getAttribute('data-blocks')) || 0;
+                if (blocksCount === 0) return; // дни отдыха не проверяем
+                const blockItems = dayCard.querySelectorAll('.block-item[data-block-id]');
+                let allDone = true;
+                if (blockItems.length === 0) allDone = false;
+                blockItems.forEach(bi => {
+                    const bid = bi.getAttribute('data-block-id');
+                    if (progress[bid] !== true) allDone = false;
+                });
+                if (allDone && blockItems.length > 0) {
+                    dayCard.classList.add('completed-day');
+                } else {
+                    dayCard.classList.remove('completed-day');
+                }
+            });
+
+            // Если всё завершено — мини-поздравление
+            if (completed >= total && total > 0) {
+                if (!document.getElementById('congratsToast')) {
+                    spawnConfetti();
+                    showCongrats();
+                }
+            }
+        }
+
+        function toggleBlock(blockElement, blockId) {
+            const currentlyCompleted = isBlockCompleted(blockId);
+            const newState = !currentlyCompleted;
+            setBlockCompleted(blockId, newState);
+
+            // Анимация
+            blockElement.classList.add('highlight-pulse');
+            setTimeout(() => blockElement.classList.remove('highlight-pulse'), 600);
+
+            // Если только что завершили — маленький эффект
+            if (newState) {
+                const checkbox = blockElement.querySelector('.block-checkbox');
+                if (checkbox) {
+                    checkbox.style.transform = 'scale(1.4)';
+                    setTimeout(() => { checkbox.style.transform = 'scale(1)'; }, 250);
+                }
+            }
+        }
+
+        function toggleDay(headerElement) {
+            const dayCard = headerElement.parentElement;
+            dayCard.classList.toggle('open');
+            const arrow = headerElement.querySelector('span:last-child');
+            if (arrow && arrow.textContent.trim() === '▾') {
+                arrow.style.transform = dayCard.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        }
+
+        function expandAllDays() {
+            document.querySelectorAll('.day-card').forEach(card => {
+                card.classList.add('open');
+                const arrow = card.querySelector('.day-header span:last-child');
+                if (arrow) arrow.style.transform = 'rotate(180deg)';
+            });
+        }
+
+        function collapseAllDays() {
+            document.querySelectorAll('.day-card').forEach(card => {
+                card.classList.remove('open');
+                const arrow = card.querySelector('.day-header span:last-child');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            });
+        }
+
+        function resetProgress() {
+            if (confirm('Вы уверены, что хотите сбросить весь прогресс? Это действие нельзя отменить.')) {
+                progress = {};
+                saveProgress(progress);
+                updateAllUI();
+                collapseAllDays();
+                // Убираем тост если был
+                const toast = document.getElementById('congratsToast');
+                if (toast) toast.remove();
+            }
+        }
+
+        function spawnConfetti() {
+            const colors = ['#6750A4', '#E040FB', '#FF4081', '#FF6E40', '#536DFE', '#448AFF',
+            '#B388FF', '#7C4DFF', '#00E676', '#FFD740', '#FF6D00'];
+            for (let i = 0; i < 60; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = -(Math.random() * 60 + 20) + 'px';
+                    confetti.style.width = (Math.random() * 12 + 6) + 'px';
+                    confetti.style.height = (Math.random() * 12 + 6) + 'px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = '0s';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 25);
+            }
+        }
+
+        function showCongrats() {
+            const existing = document.getElementById('congratsToast');
+            if (existing) return;
+            const toast = document.createElement('div');
+            toast.id = 'congratsToast';
+            toast.style.cssText = `
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: var(--gradient-1); color: white; padding: 16px 28px;
+            border-radius: var(--radius-full); font-weight: 700; font-size: 1rem;
+            z-index: 10000; box-shadow: var(--shadow-4); animation: fadeSlideIn 0.5s var(--transition-bouncy);
+            cursor: pointer; text-align: center;
+          `;
+            toast.textContent = '🎉 Поздравляем! Курс полностью пройден! Вы — Modern Android Warrior! 🚀';
+            toast.onclick = () => toast.remove();
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                if (document.getElementById('congratsToast')) {
+                    document.getElementById('congratsToast').remove();
+                }
+            }, 8000);
+        }
+
+// ============ ТАБЫ ============
+        function switchWeek(weekNumber) {
+            document.querySelectorAll('.week-content').forEach(wc => wc.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+            var targetContent = document.querySelector('.week-content[data-week="' + weekNumber + '"]');
+            var targetTab = document.querySelector('.tab-btn[data-week="' + weekNumber + '"]');
+            if (targetContent) targetContent.classList.add('active');
+            if (targetTab) targetTab.classList.add('active');
+        }
+
+        // ============ ИНИЦИАЛИЗАЦИЯ ============
+        function init() {
+            // Восстанавливаем UI из прогресса
+            updateAllUI();
+
+            // Вешаем обработчики на табы
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+btn.addEventListener('click', function() {
+                    var week = this.getAttribute('data-week');
+                    switchWeek(week);
+                });
+            });
+
+            // По умолчанию все дни свёрнуты
+            collapseAllDays();
+
+            // Обновляем счётчики в статистике
+            document.getElementById('totalBlocksCount').textContent = TOTAL_BLOCKS;
+            document.getElementById('totalBlocks').textContent = TOTAL_BLOCKS;
+            document.getElementById('totalStudyDays').textContent = '14';
+            document.getElementById('totalStudyHours').textContent = '58 ч';
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+
+        // ============ ГОРЯЧИЕ КЛАВИШИ ============
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'e') {
+                e.preventDefault();
+                expandAllDays();
+            }
+            if (e.ctrlKey && e.key === 'c') {
+                e.preventDefault();
+                collapseAllDays();
+            }
+            if (e.ctrlKey && e.key === '1') { e.preventDefault();
+                switchWeek(1); }
+            if (e.ctrlKey && e.key === '2') { e.preventDefault();
+                switchWeek(2); }
+            if (e.ctrlKey && e.key === '3') { e.preventDefault();
+                switchWeek(3); }
+        });
+
+        console.log('📱 ModernAndroidWarrior Roadmap загружена!');
+        console.log('   Горячие клавиши: Ctrl+1/2/3 — переключение недель, Ctrl+E — развернуть, Ctrl+C — свернуть');
+        console.log('   Прогресс сохраняется в localStorage браузера.');
+        console.log('   Всего блоков:', TOTAL_BLOCKS);
+        console.log('   Старт: 3 мая 2026 | Финиш: 23 мая 2026 | 3 недели 🚀');
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+.progress-section {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg) 28px;
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--outline-variant);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 14px;
+    margin-top: var(--spacing-sm);
+}
+
+.progress-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.progress-percent {
+    font-size: 2rem;
+    font-weight: 900;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.progress-track {
+    width: 100%;
+    height: 18px;
+    background: var(--surface-variant);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-secondary);
+    border-radius: var(--radius-full);
+    transition: width 0.7s var(--transition-bouncy);
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    right: 4px;
+    top: 3px;
+    bottom: 3px;
+    width: 30px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-full);
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+.progress-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-sm);
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    font-weight: 500;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}

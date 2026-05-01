@@ -1,0 +1,132 @@
+.day-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--outline-variant);
+    overflow: hidden;
+    transition: all 0.3s var(--transition-smooth);
+}
+
+.day-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-container);
+}
+
+.day-card--rest {
+    opacity: 0.7;
+    border-style: dashed;
+    background: var(--surface-variant);
+}
+
+.day-card--completed .day-indicator {
+    background: var(--success-container);
+    color: var(--success);
+    border: 3px solid var(--success);
+}
+
+.day-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: var(--spacing-md) 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+    flex-wrap: wrap;
+}
+
+.day-header:hover {
+    background: rgba(103, 80, 164, 0.03);
+}
+
+.day-indicator {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.day-card--rest .day-indicator {
+    background: var(--surface-variant);
+    color: var(--on-surface-variant);
+    border: 2px dashed var(--outline);
+}
+
+.day-info {
+    flex: 1;
+    min-width: 180px;
+}
+
+.day-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--on-surface);
+}
+
+.day-date {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    font-weight: 500;
+}
+
+.day-badge {
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.day-badge--study {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+.day-badge--rest {
+    background: var(--tertiary-container);
+    color: var(--on-tertiary-container);
+}
+
+.day-badge--gym {
+    background: #FFE0B2;
+    color: #E65100;
+}
+
+.day-badge--home {
+    background: #BBDEFB;
+    color: #0D47A1;
+}
+
+.day-body {
+    padding: 0 20px 18px 20px;
+    display: none;
+    border-top: 1px solid var(--outline-variant);
+    margin-top: var(--spacing-xs);
+    padding-top: var(--spacing-md);
+}
+
+.day-card--open .day-body {
+    display: block;
+}
+
+.day-arrow {
+    margin-left: auto;
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+    display: inline-block;
+}
+
+.day-card--open .day-arrow {
+    transform: rotate(180deg);
+}
