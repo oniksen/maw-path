@@ -34,7 +34,7 @@ days: [
                     date: '6 мая',
                     timeInfo: 'Выходной',
                     type: 'rest',
-                    extraBadges: [{ type: 'gym', label: 'Спортзал' }]
+                    extraBadges: []
                 },
                 {
                     id: 'thu-1',
@@ -53,8 +53,7 @@ days: [
                     timeInfo: 'Домашние дела',
                     type: 'rest',
                     extraBadges: [
-                        { type: 'home', label: 'Дела' },
-                        { type: 'gym', label: 'Спортзал' }
+                        { type: 'home', label: 'Дела' }
                     ]
                 },
                 {
@@ -72,9 +71,9 @@ days: [
                     id: 'sun-1',
                     dayName: 'Воскресенье',
                     date: '10 мая',
-                    timeInfo: '10:00–15:30 (спортзал утром)',
+                    timeInfo: '10:00–15:30',
                     type: 'study',
-                    extraBadges: [{ type: 'gym', label: 'Зал' }],
+                    extraBadges: [],
                     blocks: [
                         { id: '1-7', title: 'Глава 1, Блок 5. Performance', meta: 'Микроблок ~50 мин', time: '50м' },
                         { id: '1-9', title: 'Глава 2, Блок 2. Clean Architecture', meta: 'Микроблок ~45 мин', time: '45м' },
@@ -110,13 +109,13 @@ days: [
                         { id: '2-7', title: 'Глава 2, Блок 7. Ошибки в проекте', meta: '~30 мин', time: '30м' }
                     ]
                 },
-                {
+{
                     id: 'wed-2',
                     dayName: 'Среда',
                     date: '13 мая',
                     timeInfo: 'Выходной',
                     type: 'rest',
-                    extraBadges: [{ type: 'gym', label: 'Спортзал' }]
+                    extraBadges: []
                 },
                 {
                     id: 'thu-2',
@@ -138,8 +137,7 @@ days: [
                     timeInfo: 'Домашние дела',
                     type: 'rest',
                     extraBadges: [
-                        { type: 'home', label: 'Дела' },
-                        { type: 'gym', label: 'Спортзал' }
+                        { type: 'home', label: 'Дела' }
                     ]
                 },
                 {
@@ -159,7 +157,7 @@ days: [
                     date: '17 мая',
                     timeInfo: 'Выходной',
                     type: 'rest',
-                    extraBadges: [{ type: 'gym', label: 'Спортзал' }]
+                    extraBadges: []
                 }
             ]
         },
@@ -195,7 +193,7 @@ subtitle: '18–24 мая',
                     date: '20 мая',
                     timeInfo: 'Выходной',
                     type: 'rest',
-                    extraBadges: [{ type: 'gym', label: 'Спортзал' }]
+                    extraBadges: []
                 },
                 {
                     id: 'thu-3',
@@ -216,8 +214,7 @@ subtitle: '18–24 мая',
                     timeInfo: 'Домашние дела',
                     type: 'rest',
                     extraBadges: [
-                        { type: 'home', label: 'Дела' },
-                        { type: 'gym', label: 'Спортзал' }
+                        { type: 'home', label: 'Дела' }
                     ]
                 },
                 {
@@ -235,9 +232,9 @@ subtitle: '18–24 мая',
                     id: 'sun-3',
                     dayName: 'Воскресенье',
                     date: '24 мая',
-                    timeInfo: '10:00–16:10 (спортзал утром)',
+                    timeInfo: '10:00–16:10',
                     type: 'study',
-                    extraBadges: [{ type: 'gym', label: 'Зал' }],
+                    extraBadges: [],
                     blocks: [
                         { id: '3-9', title: 'Глава 4, Блок 6. Animations and Magic', meta: '🎉 Финальный блок! ~6ч 10м', time: '6ч 10м' }
                     ]
