@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="css/components/tabs.css">
     <link rel="stylesheet" href="css/components/day-card.css">
     <link rel="stylesheet" href="css/components/block-item.css">
-    <link rel="stylesheet" href="css/components/buttons.css">
+<link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/gym-planner.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -24,9 +25,9 @@
             <h1 class="hero-title">ModernAndroidWarrior</h1>
             <p class="hero-subtitle">Полная дорожная карта от основ Android до продвинутого UI — с расписанием по дням и отслеживанием прогресса</p>
             <div class="hero-dates">
-                <span>📅 3 мая 2026</span>
+                <span>📅 4 мая 2026</span>
                 <span class="hero-dates__dot"></span>
-                <span>23 мая 2026</span>
+                <span>24 мая 2026</span>
                 <span class="hero-dates__duration">3 недели</span>
             </div>
         </header>
@@ -50,7 +51,8 @@
         </div>
 
         <!-- Управление -->
-        <div class="actions-row">
+<div class="actions-row">
+            <button class="btn btn--outline btn--sm" id="gymPlannerBtn">🏋️ Планировщик зала</button>
             <button class="btn btn--outline btn--sm" id="expandAllBtn">📖 Развернуть всё</button>
             <button class="btn btn--outline btn--sm" id="collapseAllBtn">📕 Свернуть всё</button>
             <button class="btn btn--outline btn--sm" id="resetProgressBtn">🔄 Сбросить прогресс</button>
@@ -73,6 +75,7 @@
 <script src="js/config.js"></script>
     <script src="js/data.js"></script>
     <script src="js/progress-manager.js"></script>
+    <script src="js/schedule-manager.js"></script>
     <script src="js/ui-controller.js"></script>
     <script src="js/app.js"></script>
 </body>

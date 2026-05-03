@@ -1,9 +1,9 @@
 // Конфигурация приложения
 const CONFIG = {
     STORAGE_KEY: 'maw_roadmap_progress',
-    TOTAL_BLOCKS: 24,
-    START_DATE: '2026-05-03',
-    END_DATE: '2026-05-23',
+    TOTAL_BLOCKS: 25,
+    START_DATE: '2026-05-04',
+    END_DATE: '2026-05-24',
     VERSION: '1.0.0'
 };
 

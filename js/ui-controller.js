@@ -14,7 +14,7 @@ class UIController {
         console.log('   Горячие клавиши: Ctrl+1/2/3 — переключение недель, Ctrl+E — развернуть, Ctrl+C — свернуть');
         console.log('   Прогресс сохраняется в localStorage браузера.');
         console.log('   Всего блоков:', CONFIG.TOTAL_BLOCKS);
-        console.log('   Старт: 3 мая 2026 | Финиш: 23 мая 2026 | 3 недели 🚀');
+        console.log('   Старт: 4 мая 2026 | Финиш: 24 мая 2026 | 3 недели 🚀');
     }
 
     _renderStats() {
@@ -59,16 +59,17 @@ class UIController {
         `).join('');
     }
 
-    _renderDay(day) {
+_renderDay(day) {
         const isRest = day.type === 'rest';
         const blocks = day.blocks || [];
         const blocksCount = blocks.length;
         const extraBadges = day.extraBadges || [];
+        const isGymDay = day.isGymDay && day.type !== 'rest';
         
         const badgeClass = isRest ? 'day-card--rest' : '';
         
         return `
-            <div class="day-card ${badgeClass}${day.type === 'study' ? '' : ''}" data-day="${day.id}" data-blocks="${blocksCount}">
+            <div class="day-card ${badgeClass}${isGymDay ? ' day-card--has-gym' : ''}" data-day="${day.id}" data-blocks="${blocksCount}">
                 <div class="day-header">
                     <div class="day-indicator">${this._getDayShortName(day.dayName)}<br><small>${day.date}</small></div>
                     <div class="day-info">
@@ -77,6 +78,7 @@ class UIController {
                     </div>
 ${day.type === 'study' ? '<span class="day-badge day-badge--study">📚 Учёба</span>' : ''}
                     ${isRest ? '<span class="day-badge day-badge--rest">😴 Отдых</span>' : ''}
+                    ${isGymDay ? '<span class="day-badge day-badge--gym">🏋️ Зал</span>' : ''}
                     ${(extraBadges || []).map(badge => {
                         const badgeTypeClass = badge.type === 'gym' ? 'day-badge--gym' : 'day-badge--home';
                         const emoji = badge.type === 'gym' ? '🏋️' : '🏠';
@@ -242,7 +244,7 @@ ${day.type === 'study' ? '<span class="day-badge day-badge--study">📚 Учёб
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Горячие клавиши
+// Горячие клавиши
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'e') {
                 e.preventDefault();
@@ -264,7 +266,14 @@ ${day.type === 'study' ? '<span class="day-badge day-badge--study">📚 Учёб
                 e.preventDefault();
                 this.switchWeek(3);
             }
+            if (e.ctrlKey && e.key === 'g') {
+                e.preventDefault();
+                this.openGymPlanner();
+            }
         });
+
+        // Кнопка планировщика зала
+        document.getElementById('gymPlannerBtn')?.addEventListener('click', () => this.openGymPlanner());
     }
 
     expandAllDays() {
@@ -310,7 +319,7 @@ ${day.type === 'study' ? '<span class="day-badge day-badge--study">📚 Учёб
         }, 8000);
     }
 
-    _spawnConfetti() {
+_spawnConfetti() {
         const colors = [
             '#6750A4', '#E040FB', '#FF4081', '#FF6E40', '#536DFE', 
             '#448AFF', '#B388FF', '#7C4DFF', '#00E676', '#FFD740', '#FF6D00'
@@ -331,6 +340,198 @@ ${day.type === 'study' ? '<span class="day-badge day-badge--study">📚 Учёб
                 setTimeout(() => confetti.remove(), 3000);
             }, i * 25);
         }
+    }
+
+    openGymPlanner() {
+        const existing = document.getElementById('gymPlannerOverlay');
+        if (existing) {
+            existing.remove();
+        }
+
+        const weekNumber = this.currentWeek;
+        const gymDays = scheduleManager.getGymDays(weekNumber);
+        const templates = scheduleManager.getTemplates();
+
+        const overlay = document.createElement('div');
+        overlay.id = 'gymPlannerOverlay';
+        overlay.className = 'gym-planner-overlay';
+
+        overlay.innerHTML = `
+            <div class="gym-planner-modal">
+                <div class="gym-planner-header">
+                    <h2 class="gym-planner-title">🏋️ Неделя ${weekNumber}</h2>
+                    <button class="gym-planner-close" id="gymPlannerCloseBtn">&times;</button>
+                </div>
+                <div class="gym-planner-body">
+                    <div class="gym-planner-section-title">Выберите дни тренировок</div>
+                    ${this._renderDayPickerCells(gymDays)}
+                    
+                    <div class="gym-planner-section-title">Шаблоны</div>
+                    <div class="template-chips">
+                        ${templates.map(t => `
+                            <div class="template-chip" data-days="${t.days.join(',')}" data-template="${t.name}">${t.label}</div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="gym-planner-warning" id="gymPlannerWarning">
+                        <strong>Внимание:</strong> Выберите хотя бы один день без тренировок для сложных тем.
+                    </div>
+                </div>
+                <div class="gym-planner-footer">
+                    <button class="btn btn--outline btn--sm" id="cancelPlanner">Отмена</button>
+                    <button class="btn btn--primary btn--sm" id="applyPlanner">Применить</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+        this._bindPlannerEvents(overlay, weekNumber);
+    }
+
+    _renderDayPickerCells(activeDays) {
+        const dayNames = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+        
+        return `
+            <div class="day-picker-grid">
+                ${dayNames.map((name, index) => {
+                    const dayNum = index + 1;
+                    const isActive = activeDays.indexOf(dayNum) !== -1;
+                    const icon = isActive ? '🏋️' : '⚪';
+                    return `
+                        <div class="day-picker-cell${isActive ? ' day-picker-cell--active' : ''}" data-day="${dayNum}">
+                            <span class="day-picker-cell__icon">${icon}</span>
+                            <span class="day-picker-cell__label">${name}</span>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    }
+
+    _closeGymPlanner() {
+        const overlay = document.getElementById('gymPlannerOverlay');
+        if (overlay) {
+            overlay.remove();
+        }
+    }
+
+    _bindPlannerEvents(overlay, weekNumber) {
+        const self = this;
+        const currentGymDays = scheduleManager.getGymDays(weekNumber);
+        let selectedDays = currentGymDays.slice();
+
+        const updateCells = function() {
+            const cells = overlay.querySelectorAll('.day-picker-cell');
+            cells.forEach(function(cell) {
+                const dayNum = parseInt(cell.dataset.day);
+                if (selectedDays.indexOf(dayNum) !== -1 && selectedDays.indexOf(dayNum) !== -1) {
+                    cell.classList.add('day-picker-cell--active');
+                    cell.querySelector('.day-picker-cell__icon').textContent = '🏋️';
+                } else {
+                    cell.classList.remove('day-picker-cell--active');
+                    cell.querySelector('.day-picker-cell__icon').textContent = '⚪';
+                }
+            });
+
+            const warning = document.getElementById('gymPlannerWarning');
+            if (warning) {
+                const hasGymEveryDay = selectedDays.length >= 7;
+                warning.classList.toggle('gym-planner-warning--visible', hasGymEveryDay);
+            }
+        };
+
+        overlay.querySelectorAll('.day-picker-cell').forEach(function(cell) {
+            cell.addEventListener('click', function() {
+                const dayNum = parseInt(cell.dataset.day);
+                const idx = selectedDays.indexOf(dayNum);
+                if (idx !== -1) {
+                    selectedDays.splice(idx, 1);
+                } else {
+                    selectedDays.push(dayNum);
+                }
+                updateCells();
+            });
+        });
+
+        overlay.querySelectorAll('.template-chip').forEach(function(chip) {
+            chip.addEventListener('click', function() {
+                const daysStr = chip.dataset.days;
+                selectedDays = daysStr.split(',').map(function(d) { return parseInt(d); });
+                
+                overlay.querySelectorAll('.template-chip').forEach(function(c) {
+                    c.classList.remove('template-chip--active');
+                });
+                chip.classList.add('template-chip--active');
+                
+                updateCells();
+            });
+        });
+
+        document.getElementById('gymPlannerCloseBtn').addEventListener('click', function() {
+            self._closeGymPlanner();
+        });
+
+        document.getElementById('cancelPlanner').addEventListener('click', function() {
+            self._closeGymPlanner();
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                self._closeGymPlanner();
+            }
+        });
+
+        document.addEventListener('keydown', function escapeHandler(e) {
+            if (e.key === 'Escape') {
+                self._closeGymPlanner();
+                document.removeEventListener('keydown', escapeHandler);
+            }
+        });
+
+        document.getElementById('applyPlanner').addEventListener('click', function() {
+            scheduleManager.setGymDays(weekNumber, selectedDays);
+            self._closeGymPlanner();
+            self._reRenderCurrentWeek();
+            self._showToast('Расписание сохранено!', 'success');
+        });
+    }
+
+    _reRenderCurrentWeek() {
+        const weekNumber = this.currentWeek;
+        const weekData = courseData.weeks.find(function(w) { return w.id === weekNumber; });
+        if (!weekData) return;
+
+        const gymDays = scheduleManager.getGymDays(weekNumber);
+
+        weekData.days.forEach(function(day, index) {
+            const dayNum = index + 1;
+            day.isGymDay = gymDays.indexOf(dayNum) !== -1;
+        });
+
+        const weekContainer = document.querySelector('.week-content[data-week="' + weekNumber + '"]');
+        if (weekContainer) {
+            weekContainer.innerHTML = weekData.days.map(function(day) {
+                return uiController._renderDay(day);
+            }).join('');
+        }
+
+        this._updateProgressUI();
+    }
+
+    _showToast(message, type) {
+        const existing = document.querySelector('.gym-planner-toast');
+        if (existing) {
+            existing.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = 'gym-planner-toast gym-planner-toast--' + type;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(function() {
+            toast.remove();
+        }, 3000);
     }
 }
 

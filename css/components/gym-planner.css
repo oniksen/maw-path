@@ -1,0 +1,224 @@
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.gym-planner-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s;
+}
+
+.gym-planner-modal {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    width: 90%;
+    max-width: 520px;
+    box-shadow: var(--shadow-xl);
+    animation: slideUp 0.3s;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.gym-planner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.gym-planner-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.gym-planner-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-md);
+    color: var(--on-surface-variant);
+    transition: background 0.2s;
+    line-height: 1;
+}
+
+.gym-planner-close:hover {
+    background: var(--surface-variant);
+}
+
+.gym-planner-body {
+    padding: 24px;
+}
+
+.gym-planner-section-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.day-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.day-picker-cell {
+    padding: 12px 6px;
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.2s ease;
+    background: var(--surface);
+}
+
+.day-picker-cell:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.day-picker-cell--active {
+    border-color: #E65100;
+    background: #FFF3E0;
+}
+
+.day-picker-cell--active:hover {
+    border-color: #E65100;
+}
+
+.day-picker-cell__icon {
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+}
+
+.day-picker-cell__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--on-surface);
+    text-transform: uppercase;
+}
+
+.template-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.template-chip {
+    padding: 8px 14px;
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    background: var(--surface);
+    color: var(--on-surface);
+    font-weight: 500;
+}
+
+.template-chip:hover {
+    background: var(--primary-container);
+    border-color: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+.template-chip--active {
+    background: var(--primary-container);
+    border-color: var(--primary);
+    color: var(--on-primary-container);
+}
+
+.gym-planner-warning {
+    background: #FFF3CD;
+    border: 1px solid #FFC107;
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    color: #856404;
+    font-size: 0.85rem;
+    display: none;
+    margin-bottom: 16px;
+}
+
+.gym-planner-warning--visible {
+    display: block;
+}
+
+.gym-planner-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--outline-variant);
+}
+
+.gym-planner-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 24px;
+    border-radius: var(--radius-full);
+    z-index: 2000;
+    animation: slideUp 0.4s;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.gym-planner-toast--success {
+    background: var(--success-container);
+    color: var(--success);
+}
+
+.gym-planner-toast--warning {
+    background: #FFF3CD;
+    color: #856404;
+}
+
+@media (max-width: 480px) {
+    .day-picker-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .gym-planner-modal {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .gym-planner-body {
+        padding: 16px;
+    }
+}
