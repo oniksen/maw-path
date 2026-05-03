@@ -130,3 +130,7 @@
 .day-card--open .day-arrow {
     transform: rotate(180deg);
 }
+
+.day-card--has-gym {
+    border-left: 3px solid #E65100;
+}
