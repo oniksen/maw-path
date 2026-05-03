@@ -78,7 +78,7 @@ _renderDay(day) {
                     </div>
 ${day.type === 'study' ? '<span class="day-badge day-badge--study">📚 Учёба</span>' : ''}
                     ${isRest ? '<span class="day-badge day-badge--rest">😴 Отдых</span>' : ''}
-                    ${isGymDay ? '<span class="day-badge day-badge--gym">🏋️ Зал</span>' : ''}
+                    ${isGymDay ? '<span class="day-badge day-badge--gym">🏋️ Спортзал</span>' : ''}
                     ${(extraBadges || []).map(badge => {
                         const badgeTypeClass = badge.type === 'gym' ? 'day-badge--gym' : 'day-badge--home';
                         const emoji = badge.type === 'gym' ? '🏋️' : '🏠';
@@ -497,21 +497,32 @@ _spawnConfetti() {
     }
 
     _reRenderCurrentWeek() {
+        const self = this;
         const weekNumber = this.currentWeek;
         const weekData = courseData.weeks.find(function(w) { return w.id === weekNumber; });
         if (!weekData) return;
 
         const gymDays = scheduleManager.getGymDays(weekNumber);
 
-        weekData.days.forEach(function(day, index) {
-            const dayNum = index + 1;
-            day.isGymDay = gymDays.indexOf(dayNum) !== -1;
+        const dayNameToNumber = {
+            'Понедельник': 1,
+            'Вторник': 2,
+            'Среда': 3,
+            'Четверг': 4,
+            'Пятница': 5,
+            'Суббота': 6,
+            'Воскресенье': 7
+        };
+
+        weekData.days.forEach(function(day) {
+            const dayNum = dayNameToNumber[day.dayName];
+            day.isGymDay = dayNum ? gymDays.indexOf(dayNum) !== -1 : false;
         });
 
         const weekContainer = document.querySelector('.week-content[data-week="' + weekNumber + '"]');
         if (weekContainer) {
             weekContainer.innerHTML = weekData.days.map(function(day) {
-                return uiController._renderDay(day);
+                return self._renderDay(day);
             }).join('');
         }
 

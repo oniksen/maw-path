@@ -45,7 +45,7 @@
     }
 
     var scheduleManager = {
-        DEFAULT_GYM_DAYS: [3, 5, 7],
+        DEFAULT_GYM_DAYS: [],
 
         getGymDays: function(weekNumber) {
             var storage = getGymScheduleStorage();

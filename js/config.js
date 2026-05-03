@@ -12,7 +12,7 @@ const STATS_TEMPLATE = [
     { icon: '📝', value: '58 ч', label: 'С учётом практики', id: 'totalStudyHours' },
     { icon: '📦', value: '24', label: 'Учебных блоков', id: 'totalBlocks', accent: true },
     { icon: '🗓️', value: '15', label: 'Учебных дней', id: 'totalStudyDays' },
-    { icon: '💪', value: '3', label: 'Дня спортзала / нед.' },
+    { icon: '💪', value: '0', label: 'Дней спортзала / нед.' },
     { icon: '🧘', value: '9', label: 'Дней отдыха' }
 ];
 
