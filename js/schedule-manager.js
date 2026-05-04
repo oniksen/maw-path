@@ -24,46 +24,22 @@
         return total;
     }
 
-    function getGymScheduleStorage() {
-        try {
-            var stored = localStorage.getItem('maw_gym_schedule');
-            if (stored) {
-                return JSON.parse(stored);
-            }
-        } catch (e) {
-            console.warn('Failed to load gym schedule from localStorage', e);
-        }
-        return {};
-    }
-
-    function saveGymScheduleStorage(data) {
-        try {
-            localStorage.setItem('maw_gym_schedule', JSON.stringify(data));
-        } catch (e) {
-            console.error('Failed to save gym schedule', e);
-        }
-    }
-
     var scheduleManager = {
         DEFAULT_GYM_DAYS: [],
 
         getGymDays: function(weekNumber) {
-            var storage = getGymScheduleStorage();
-            var weekData = storage[weekNumber];
-            if (weekData && Array.isArray(weekData.days)) {
-                return weekData.days;
+            if (window.settingsManager) {
+                return window.settingsManager.getGymDays(weekNumber);
             }
             return this.DEFAULT_GYM_DAYS.slice();
         },
 
         setGymDays: function(weekNumber, days) {
-            var storage = getGymScheduleStorage();
-            if (!storage[weekNumber]) {
-                storage[weekNumber] = {};
+            if (window.settingsManager) {
+                window.settingsManager.setGymDays(weekNumber, days);
+                return true;
             }
-            storage[weekNumber].days = days.slice ? days.slice() : [];
-            saveGymScheduleStorage(storage);
-            return true;
+            return false;
         },
 
         getTemplates: function() {

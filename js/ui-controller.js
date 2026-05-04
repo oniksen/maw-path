@@ -48,12 +48,44 @@ class UIController {
         });
     }
 
+_applyGymDaysToWeek(weekData) {
+        const gymDays = scheduleManager.getGymDays(weekData.id);
+        const dayNameToNumber = {
+            'Понедельник': 1, 'Вторник': 2, 'Среда': 3,
+            'Четверг': 4, 'Пятница': 5, 'Суббота': 6, 'Воскресенье': 7
+        };
+        weekData.days.forEach(day => {
+            const dayNum = dayNameToNumber[day.dayName];
+            day.isGymDay = dayNum ? gymDays.indexOf(dayNum) !== -1 : false;
+        });
+    }
+
     _renderWeeks() {
         const weeksContainer = document.getElementById('weeksContainer');
         if (!weeksContainer) return;
 
+        courseData.weeks.forEach(week => {
+            this._applyGymDaysToWeek(week);
+        });
+
         weeksContainer.innerHTML = courseData.weeks.map(week => `
             <div class="week-content${week.id === 1 ? ' week-content--active' : ''}" data-week="${week.id}">
+                ${week.days.map(day => this._renderDay(day)).join('')}
+            </div>
+        `).join('');
+    }
+
+    _rerenderAllWeeks() {
+        const currentWeekId = this.currentWeek;
+        const weeksContainer = document.getElementById('weeksContainer');
+        if (!weeksContainer) return;
+
+        courseData.weeks.forEach(week => {
+            this._applyGymDaysToWeek(week);
+        });
+
+        weeksContainer.innerHTML = courseData.weeks.map(week => `
+            <div class="week-content${week.id === currentWeekId ? ' week-content--active' : ''}" data-week="${week.id}">
                 ${week.days.map(day => this._renderDay(day)).join('')}
             </div>
         `).join('');
@@ -64,7 +96,7 @@ _renderDay(day) {
         const blocks = day.blocks || [];
         const blocksCount = blocks.length;
         const extraBadges = day.extraBadges || [];
-        const isGymDay = day.isGymDay && day.type !== 'rest';
+        const isGymDay = day.isGymDay;
         
         const badgeClass = isRest ? 'day-card--rest' : '';
         
@@ -284,14 +316,27 @@ ${day.type === 'study' ? '<span class="day-badge day-badge--study">📚 Учёб
         document.querySelectorAll('.day-card').forEach(card => card.classList.remove('day-card--open'));
     }
 
-    resetProgress() {
-        if (confirm('Вы уверены, что хотите сбросить весь прогресс? Это действие нельзя отменить.')) {
+resetProgress() {
+        const choice = confirm(
+            'Вы уверены, что хотите сбросить прогресс?\n\n' +
+            'OK — сбросить прогресс и настройки спортзала\n' +
+            'Отмена — сбросить только прогресс'
+        );
+        
+        if (choice) {
             progressManager.reset();
-            this._updateProgressUI();
-            this.collapseAllDays();
-            const toast = document.getElementById('congratsToast');
-            if (toast) toast.remove();
+            if (window.settingsManager) {
+                window.settingsManager.resetGymDays();
+            }
+            this._rerenderAllWeeks();
+        } else {
+            progressManager.reset();
         }
+        
+        this._updateProgressUI();
+        this.collapseAllDays();
+        const toast = document.getElementById('congratsToast');
+        if (toast) toast.remove();
     }
 
     _showCongrats() {
