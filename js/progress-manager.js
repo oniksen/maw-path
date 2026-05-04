@@ -4,6 +4,9 @@ class ProgressManager {
     }
 
     _loadProgress() {
+        if (window.settingsManager) {
+            return window.settingsManager.getProgress();
+        }
         try {
             const stored = localStorage.getItem(CONFIG.STORAGE_KEY);
             if (stored) {
@@ -19,6 +22,10 @@ class ProgressManager {
     }
 
     _saveProgress() {
+        if (window.settingsManager) {
+            window.settingsManager.setProgress(this.progress);
+            return;
+        }
         try {
             localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(this.progress));
         } catch (e) {
